@@ -11,8 +11,8 @@ We'll be able to see movies that exist in our DB. We'll also be able to see deta
 
 ## Database Setup
 
-[] 1. Create a database named `saga_movies_weekend`
-[] 2. Run the queries from `database.sql` on the `saga_movies_weekend` database.
+[x] 1. Create a database named `saga_movies_weekend`
+[x] 2. Run the queries from `database.sql` on the `saga_movies_weekend` database.
 [] 3. You will need to create the junction table between the `movies` and `genres` tables!
 -- CREATE JUNCTION TABLE
 -- You will need to create the junction table that stores the relationships between "movies" and "genres"
@@ -28,12 +28,15 @@ We'll be able to see movies that exist in our DB. We'll also be able to see deta
 ## Notes
 
 ### Genres
+
 We've given you some starter genres in the database. Feel free to change or add some with Postico.
- 
+
 ### Movies
+
 We've added some movie posters in the `public/images` folder, and the database is set up to use them.
 
 ### Relationships
+
 Genres can be applied to many different movies. Movies can have multiple genres. This is Many-to-Many! Junction Table time!
 
 ## Feature List
@@ -76,8 +79,8 @@ The edit page should have the buttons:
 As one of your last projects, it's possible you will be sharing this with employers, so be sure to follow best practices and make it look good!
 
 - [ ] Invest some time in styling it up!
-    - [ ] Research grids for your movie posters on the Movie List page
-    - [ ] Add route change animations
+  - [ ] Research grids for your movie posters on the Movie List page
+  - [ ] Add route change animations
 - [ ] Commit your code frequently! You should have at 15+ commits on a project of this size. Use branches to help break down your features.
 - [ ] Comment your code.
 - [ ] Update this README to include a description of the project in your own words.
