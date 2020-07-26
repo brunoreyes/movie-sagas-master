@@ -14,7 +14,7 @@ class MovieListItem extends Component {
   render() {
     return (
       <div>
-        <pre>{JSON.stringify(`this is details:`)}</pre>
+        <pre>{JSON.stringify(`this is the details section:`)}</pre>
         <pre>{JSON.stringify(this.props.reduxState.details)}</pre>
 
         <img
