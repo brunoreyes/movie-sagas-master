@@ -14,7 +14,7 @@ router.get('/', (req, res) => {
   pool
     .query(displayQuery)
     .then((response) => {
-      console.log('Sending response:', response.rows);
+      // console.log('Sending response:', response.rows);
       res.send(response.rows);
     })
     .catch((error) => {
@@ -23,19 +23,20 @@ router.get('/', (req, res) => {
     });
 });
 
-// return all favorite images
-// router.get('/detail/:id', (req, res) => {
-//   const queryText = 'SELECT * FROM movie WHERE id=$1';
-//   pool
-//     .query(queryText, [req.params.id])
-//     .then((result) => {
-//       res.send(result.rows);
-//     })
-//     .catch((err) => {
-//       console.log('Error completing SELECT movie query', err);
-//       res.sendStatus(500);
-//     });
-// });
+// return all selected movies images
+router.get('/detail/:id', (req, res) => {
+  const queryText = 'SELECT * FROM movies WHERE id=$1';
+  pool
+    .query(queryText, [req.params.id])
+    .then((response) => {
+      // console.log('Sending response:', response.rows);
+      res.send(response.rows);
+    })
+    .catch((err) => {
+      console.log('Error completing SELECT movie query', err);
+      res.sendStatus(500);
+    });
+});
 
 // // update given favorite with a category id
 // router.put('/', (req, res) => {

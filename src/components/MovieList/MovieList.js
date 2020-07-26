@@ -25,7 +25,12 @@ class MovieList extends Component {
           {/* mapping each item within the array and them calling them searchItem */}
 
           {this.props.reduxState.movies.map((movieItem, index) => (
-            <MovieListItem key={index} movieItem={movieItem} />
+            <MovieListItem
+              key={index}
+              history={this.props.history}
+              //   We need to pass history down to movie list item
+              movieItem={movieItem}
+            />
           ))}
         </Grid>
         {/* <pre>{JSON.stringify(this.props.reduxState.searchName)}</pre> */}

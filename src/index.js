@@ -23,6 +23,23 @@ function* getMovies() {
   }
 }
 
+function* detailMovies(action) {
+  // make sure to put action up top because we are passing i5 through detailMovies
+  try {
+    console.log(`this is action.payload in detailMovies:${action.payload}`);
+
+    const response = yield axios.get(`/api/display/detail/${action.payload}`);
+    //   Changed the bottom for the top
+    // const response = yield axios.get(
+    //     `/api/display/detail/:id`
+    //   );
+    yield console.log('This is what we get from axios.get: ', response.data);
+    yield put({ type: 'DETAIL_MOVIE', payload: response.data });
+  } catch (error) {
+    console.log('Trouble getting movie details to display', error);
+  }
+}
+
 // function* updateMovies(action) {
 //     try{
 //         //we need to get the data to updateCategory in here
@@ -39,6 +56,8 @@ function* getMovies() {
 // Create the rootSaga generator function
 function* rootSaga() {
   yield takeEvery('FETCH_MOVIES', getMovies);
+  yield takeEvery('FETCH_DETAIL', detailMovies);
+
   //   yield takeEvery('SET_CATEGORY', updateMovies);
 }
 
@@ -64,7 +83,7 @@ const genres = (state = [], action) => {
   }
 };
 
-const details = (state = [], action) => {
+const details = (state = {}, action) => {
   console.log('in details', state, action.type);
 
   switch (action.type) {

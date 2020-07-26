@@ -3,12 +3,8 @@ import { connect } from 'react-redux';
 
 class MovieListItem extends Component {
   clickhandler = () => {
-    this.props.dispatch({
-      type: 'DETAIL_MOVIE',
-      payload: this.props.reduxState.details, // we get rid of payload because we aren't returning anything bc
-      // of the else if statement written in the checkout reducer in index.js
-    });
-    // this.props.history.push('/Detail/${id}');
+    this.props.history.push(`/Detail/${this.props.movieItem.id}`);
+    // changed this :this.props.history.push('/Detail/${id}') to whats on top to specify the actual id
   };
 
   render() {
