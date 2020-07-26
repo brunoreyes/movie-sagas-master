@@ -13,7 +13,7 @@ We'll be able to see movies that exist in our DB. We'll also be able to see deta
 
 [x] 1. Create a database named `saga_movies_weekend`
 [x] 2. Run the queries from `database.sql` on the `saga_movies_weekend` database.
-[] 3. You will need to create the junction table between the `movies` and `genres` tables!
+[x] 3. You will need to create the junction table between the `movies` and `genres` tables!
 -- CREATE JUNCTION TABLE
 -- You will need to create the junction table that stores the relationships between "movies" and "genres"
 -- This table will need to be populated with some data as well (INSERTS)
