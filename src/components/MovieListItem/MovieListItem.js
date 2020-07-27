@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-
+import {
+  Paper,
+  // Paper, Slide, Typography
+} from '@material-ui/core';
 class MovieListItem extends Component {
   clickhandler = () => {
     this.props.history.push(`/Detail/${this.props.movieItem.id}`);
@@ -9,16 +12,17 @@ class MovieListItem extends Component {
 
   render() {
     return (
-      <div>
-        <pre>{JSON.stringify(`this is the details section:`)}</pre>
-        <pre>{JSON.stringify(this.props.reduxState.details)}</pre>
-
-        <img
-          src={this.props.movieItem.poster}
-          onClick={this.clickhandler}
-        ></img>
-        <p>{this.props.movieItem.title}</p>
-        <p>{this.props.movieItem.description}</p>
+      <div className="movieContainer">
+        {/* <pre>{JSON.stringify(`this is the details section:`)}</pre> */}
+        {/* <pre>{JSON.stringify(this.props.reduxState.details)}</pre> */}
+        <Paper elevation={3}>
+          <img
+            src={this.props.movieItem.poster}
+            onClick={this.clickhandler}
+          ></img>
+          <h4>{this.props.movieItem.title}</h4>
+          <p>{this.props.movieItem.description}</p>
+        </Paper>
       </div>
     );
   }

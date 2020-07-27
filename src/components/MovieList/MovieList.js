@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import {
   Grid,
-  // Paper, Slide, Typography
+  Paper,
+  // , Slide, Typography
 } from '@material-ui/core';
 import MovieListItem from '../MovieListItem/MovieListItem';
 
@@ -10,11 +11,12 @@ class MovieList extends Component {
   componentDidMount() {
     // use component did mount to dispatch an action to request the SearchList from the API
     this.props.dispatch({ type: 'FETCH_MOVIES' });
+    // this.props.dispatch({ type: 'FETCH_DETAIL' });
   }
   render() {
     return (
       <div>
-        <pre>{JSON.stringify(this.props.reduxState.movies)}</pre>
+        {/* <pre>{JSON.stringify(this.props.reduxState.movies)}</pre> */}
 
         <Grid
           container
@@ -22,16 +24,16 @@ class MovieList extends Component {
           justify="flex-start"
           alignItems="flex-start"
         >
-          {/* mapping each item within the array and them calling them searchItem */}
+            {/* mapping each item within the array and them calling them searchItem */}
 
-          {this.props.reduxState.movies.map((movieItem, index) => (
-            <MovieListItem
-              key={index}
-              history={this.props.history}
-              //   We need to pass history down to movie list item
-              movieItem={movieItem}
-            />
-          ))}
+            {this.props.reduxState.movies.map((movieItem, index) => (
+              <MovieListItem
+                key={index}
+                history={this.props.history}
+                //   We need to pass history down to movie list item
+                movieItem={movieItem}
+              />
+            ))}
         </Grid>
         {/* <pre>{JSON.stringify(this.props.reduxState.searchName)}</pre> */}
       </div>

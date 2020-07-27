@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import Edit from '../Edit/Edit';
+import {Button} from '@material-ui/core';
 
 class Detail extends Component {
   componentDidMount() {
@@ -45,22 +45,39 @@ class Detail extends Component {
     return (
       <div>
         {/* {this.props.reduxState.details.title !== '' ? 'error' : 'okay'} */}
-        {this.props.reduxState.details.title !== undefined ? (
-          'error'
-        ) : (
-          // 'okay'
-          <div>
-            <img src={this.props.reduxState.details.poster} />
-            <p>{this.props.reduxState.details.title}</p>
-            <p>{this.props.reduxState.details.description}</p>
-          </div>
-        )}
+        {/* {this.props.reduxState.details.title !== undefined ? 'error' : 'okay'} */}
+{/* We used the above two steps to test if details was coming back from the server with something */}
+        {/* <pre>{JSON.stringify(this.props.match.params.id)}</pre> */}
+        {/* <pre>{JSON.stringify(this.props.reduxState.details)}</pre> */}
 
-        <pre>{JSON.stringify(this.props.match.params.id)}</pre>
-        <pre>{JSON.stringify(this.props.details)}</pre>
         <img src={this.props.reduxState.details.poster} />
-        <p>{this.props.reduxState.details.title}</p>
-        <p>{this.props.reduxState.details.description}</p>
+        {/* <button onClick={} */}
+        {this.props.reduxState.details.map((movieDetails, arraySpot) => (
+          <tr key={arraySpot}>
+            <td>
+              <img src={movieDetails.poster}></img>
+              <h4>{movieDetails.title}</h4>
+              <p>{movieDetails.description}</p>
+
+              <Button
+                className="Button"
+                variant="contained"
+                onClick={this.editClicked}
+              >
+                        BACK
+              </Button>
+            <span className="ButtonContainer">
+              <Button
+                className="Button"
+                variant="contained"
+                onClick={this.editClicked}
+              >
+                            Edit
+              </Button>
+              </span>
+            </td>
+          </tr>
+        ))}
 
         {/* <button onClick={this.handleEdit}>Edit Information</button> */}
         {/* </span> */}

@@ -8,7 +8,12 @@ require('dotenv').config();
 // return all favorite images
 router.get('/', (req, res) => {
   const displayQuery = `SELECT * FROM movies ORDER BY title ASC;`;
-
+  // const queryText = `SELECT movies.id, title, description, poster, array_agg(genres.name)
+  // FROM movies
+  // JOIN movie_genre on movies.id = movie_genre.movie_id
+  // JOIN genres ON movie_genre.genre_id = genres.id
+  // GROUP BY movies.id
+  // ORDER BY title ASC;`;
   //pool is our connection to the database
   //we are going to query a queryString command to pool (database)
   pool
@@ -25,7 +30,8 @@ router.get('/', (req, res) => {
 
 // return all selected movies images
 router.get('/detail/:id', (req, res) => {
-  const queryText = 'SELECT * FROM movies WHERE id=$1';
+  const queryText = 'SELECT * FROM movies WHERE id=$1;';
+
   pool
     .query(queryText, [req.params.id])
     .then((response) => {
@@ -41,10 +47,10 @@ router.get('/detail/:id', (req, res) => {
 // // update given favorite with a category id
 // router.put('/', (req, res) => {
 //   //we want to see information
-//   console.log('In favorite Put')
+//   console.log('In Edit Put')
 //   console.log('req.body', req.body);
 
-//   const category_id = Number(req.body.value);
+//   const movie_id = Number(req.body.value);
 //   const id = req.body.id;
 
 //   console.log(category_id);

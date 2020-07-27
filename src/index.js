@@ -12,7 +12,7 @@ import { takeEvery, put } from 'redux-saga/effects';
 // Import saga middleware
 import createSagaMiddleware from 'redux-saga';
 
-// ------------ THESE ARE OUR GENERATOR FUNCTIONS --------------
+// ------------ THESE ARE OUR (SAGAs) GENERATOR FUNCTIONS --------------
 function* getMovies() {
   try {
     const response = yield axios.get('/api/display');
@@ -40,18 +40,18 @@ function* detailMovies(action) {
   }
 }
 
-// function* updateMovies(action) {
-//     try{
-//         //we need to get the data to updateCategory in here
-//         console.log('in updateCategory');
-//         const response = yield axios.put('/api/display', action.payload);
-//         yield console.log('In updateCategory', response);
-//         yield put ({ type: 'FETCH_MOVIES'})
-//     }
-//     catch(error) {
-//         console.log( 'Trouble adding to category', error )
-//     }
-// }
+function* editMovies(action) {
+    try{
+        //we need to get the data to updateCategory in here
+        console.log('in updateCategory');
+        const response = yield axios.put('/api/display', action.payload);
+        yield console.log('In updateCategory', response);
+        yield put ({ type: 'FETCH_MOVIES'})
+    }
+    catch(error) {
+        console.log( 'Trouble adding to category', error )
+    }
+}
 
 // Create the rootSaga generator function
 function* rootSaga() {
@@ -83,7 +83,7 @@ const genres = (state = [], action) => {
   }
 };
 
-const details = (state = {}, action) => {
+const details = (state = [], action) => {
   console.log('in details', state, action.type);
 
   switch (action.type) {
