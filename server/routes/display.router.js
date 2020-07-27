@@ -7,13 +7,13 @@ require('dotenv').config();
 
 // return all favorite images
 router.get('/', (req, res) => {
-  const displayQuery = `SELECT * FROM movies ORDER BY title ASC;`;
-  // const displayQuery = `SELECT movies.id, title, description, poster, array_agg(genres.name)
-  // // FROM movies
-  // // JOIN movie_genre on movies.id = movie_genre.movie_id
-  // // JOIN genres ON movie_genre.genre_id = genres.id
-  // // GROUP BY movies.id
-  // // ORDER BY title ASC;`;
+  // const displayQuery = `SELECT * FROM movies ORDER BY title ASC;`;
+  const displayQuery = `SELECT movies.id, title, description, poster, array_agg(genres.name)
+  FROM movies
+  JOIN movie_genre on movies.id = movie_genre.movie_id
+  JOIN genres ON movie_genre.genre_id = genres.id
+  GROUP BY movies.id
+  ORDER BY title ASC;`;
 
   // const queryText = `SELECT movies.id, title, description, poster, array_agg(genres.name)
   // FROM movies
@@ -36,20 +36,20 @@ router.get('/', (req, res) => {
 });
 
 // return all selected movies images
-router.get('/detail/:id', (req, res) => {
-  const queryText = 'SELECT * FROM movies WHERE id=$1;';
+// router.get('/detail/:id', (req, res) => {
+//   const queryText = 'SELECT * FROM movies WHERE id=$1;';
 
-  pool
-    .query(queryText, [req.params.id])
-    .then((response) => {
-      // console.log('Sending response:', response.rows);
-      res.send(response.rows);
-    })
-    .catch((err) => {
-      console.log('Error completing SELECT movie query', err);
-      res.sendStatus(500);
-    });
-});
+//   pool
+//     .query(queryText, [req.params.id])
+//     .then((response) => {
+//       // console.log('Sending response:', response.rows);
+//       res.send(response.rows);
+//     })
+//     .catch((err) => {
+//       console.log('Error completing SELECT movie query', err);
+//       res.sendStatus(500);
+//     });
+// });
 
 // // update given favorite with a category id
 router.put('/edit/:id', async (req, res) => {

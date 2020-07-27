@@ -28,7 +28,7 @@ class Edit extends Component {
     // this.props.history.path is going to bring
     // the user into the next part of the feedback form (understanding)
     // which is a route listed within App.js's router
-    this.props.history.push(`/Detail/${this.props.movieItem.id}`);
+    this.props.history.push(`/Detail/${this.props.reduxState.details.id}`);
   }; // end nextClicked
 
   cancelClicked = (event) => {
@@ -42,8 +42,9 @@ class Edit extends Component {
     // this.props.history.path is going to bring
     // the user into the next part of the feedback form (understanding)
     // which is a route listed within App.js's router
-    this.props.history.push(`/Detail/${this.props.movieItem.id}`);
-  }; // end nextClicked
+    // this.props.history.push(`/Detail/${this.props.movieItem.id}`);
+    this.props.history.push(`/Detail/${this.props.reduxState.details.id}`);
+  };
 
   textInput = (event) => {
     console.log('in textInput, value:', event.target.value);
@@ -53,7 +54,7 @@ class Edit extends Component {
       name: event.target.value,
       description: event.target.value,
     });
-  }; //end radio
+  };
 
   render() {
     return (
