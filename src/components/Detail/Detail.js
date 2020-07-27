@@ -7,7 +7,7 @@ class Detail extends Component {
     // use component did mount to dispatch an action to request the SearchList from the API
     this.props.dispatch({
       type: 'FETCH_DETAIL',
-      payload: this.props.match.params.id,
+      payload: this.props.match.params.id
       //
     });
   }
