@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Button } from '@material-ui/core';
+import Fade from 'react-reveal/Fade';
 
 class Detail extends Component {
   state = {
@@ -27,48 +28,50 @@ class Detail extends Component {
 
   render() {
     return (
-      <div>
-        {/* {this.props.reduxState.details.title !== '' ? 'error' : 'okay'} */}
-        {/* {this.props.reduxState.details.title !== undefined ? 'error' : 'okay'} */}
-        {/* We used the above two steps to test if details was coming back from the server with something */}
-        {/* <pre>{JSON.stringify(this.props.match.params.id)}</pre> */}
-        {/* <pre>{JSON.stringify(this.props.reduxState.details)}</pre> */}
+      <Fade left>
+        <div>
+          {/* {this.props.reduxState.details.title !== '' ? 'error' : 'okay'} */}
+          {/* {this.props.reduxState.details.title !== undefined ? 'error' : 'okay'} */}
+          {/* We used the above two steps to test if details was coming back from the server with something */}
+          {/* <pre>{JSON.stringify(this.props.match.params.id)}</pre> */}
+          {/* <pre>{JSON.stringify(this.props.reduxState.details)}</pre> */}
 
-        {/* <button onClick={} */}
-        {/* {this.props.reduxState.details.map((movieDetails, arraySpot) => ( */}
-        <tr>
-          <td>
-            <img src={this.props.reduxState.details.poster}></img>
-            <h4>{this.props.reduxState.details.title}</h4>
-            {/* <p>{this.props.reduxState.details.array_agg}</p> */}
+          {/* <button onClick={} */}
+          {/* {this.props.reduxState.details.map((movieDetails, arraySpot) => ( */}
+          <tr>
+            <td>
+              <img src={this.props.reduxState.details.poster}></img>
+              <h4>{this.props.reduxState.details.title}</h4>
+              {/* <p>{this.props.reduxState.details.array_agg}</p> */}
 
-            {this.props.reduxState.details.array_agg.map((genre, index) => (
-              <pre key={index}>{genre}</pre>
-            ))}
-            <p>{this.props.reduxState.details.description}</p>
+              {this.props.reduxState.details.array_agg.map((genre, index) => (
+                <pre key={index}>{genre}</pre>
+              ))}
+              <p>{this.props.reduxState.details.description}</p>
 
-            <Button
-              className="Button"
-              variant="contained"
-              onClick={this.backClicked}
-            >
-              BACK
-            </Button>
-            <span className="ButtonContainer">
               <Button
                 className="Button"
                 variant="contained"
-                onClick={this.editClicked}
+                onClick={this.backClicked}
               >
-                Edit
+                BACK
               </Button>
-            </span>
-          </td>
-        </tr>
+              <span className="ButtonContainer">
+                <Button
+                  className="Button"
+                  variant="contained"
+                  onClick={this.editClicked}
+                >
+                  Edit
+                </Button>
+              </span>
+            </td>
+          </tr>
 
-        {/* <button onClick={this.handleEdit}>Edit Information</button> */}
-        {/* </span> */}
-      </div>
+          {/* <button onClick={this.handleEdit}>Edit Information</button> */}
+          {/* </span> */}
+        </div>
+      </Fade>
     );
   }
 }
