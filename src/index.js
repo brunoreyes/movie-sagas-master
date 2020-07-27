@@ -41,22 +41,27 @@ function* detailMovies(action) {
 }
 
 function* editMovies(action) {
-    try{
-        //we need to get the data to updateCategory in here
-        console.log('in updateCategory');
-        const response = yield axios.put('/api/display', action.payload);
-        yield console.log('In updateCategory', response);
-        yield put ({ type: 'FETCH_MOVIES'})
-    }
-    catch(error) {
-        console.log( 'Trouble adding to category', error )
-    }
+  // make sure to put action up top because we are passing i5 through detailMovies
+  try {
+    console.log(`this is action.payload in editMovies:${action.payload}`);
+
+    const response = yield axios.get(`/api/display/edit/${action.payload}`);
+    //   Changed the bottom for the top
+    // const response = yield axios.get(
+    //     `/api/display/detail/:id`
+    //   );
+    yield console.log('This is what we get from axios.get: ', response.data);
+    yield put({ type: 'EDIT_MOVIE', payload: response.data });
+  } catch (error) {
+    console.log('Trouble getting movie details to display', error);
+  }
 }
 
 // Create the rootSaga generator function
 function* rootSaga() {
   yield takeEvery('FETCH_MOVIES', getMovies);
   yield takeEvery('FETCH_DETAIL', detailMovies);
+  yield takeEvery('FETCH_EDIT', editMovies);
 
   //   yield takeEvery('SET_CATEGORY', updateMovies);
 }
@@ -88,6 +93,17 @@ const details = (state = [], action) => {
 
   switch (action.type) {
     case 'DETAIL_MOVIE':
+      return action.payload;
+    default:
+      return state;
+  }
+};
+
+const edits = (state = [], action) => {
+  console.log('in details', state, action.type);
+
+  switch (action.type) {
+    case 'EDIT_MOVIE':
       return action.payload;
     default:
       return state;

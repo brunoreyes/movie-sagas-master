@@ -14,8 +14,7 @@ class Edit extends Component {
     return (
       <div>
         {this.props.reduxState.details.map((movieDetails, arraySpot) => (
-          <img key={arraySpot}> src={movieDetails.poster}></img>
-        ))}
+          <img key={arraySpot}> src={movieDetails.poster}></img>))}
         <input placeholder="Name"></input>
         <input placeholder="Description"></input>
         <button>Cancel</button>
