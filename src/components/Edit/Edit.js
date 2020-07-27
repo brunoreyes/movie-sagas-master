@@ -38,6 +38,7 @@ class Edit extends Component {
     this.props.history.push(`/`);
 
     // this.props.history.push(`/Detail/${this.props.reduxState.details.id}`);
+    // this.props.history.push(`/Detail/${this.props.match.params.id}`);
   }; // end nextClicked
 
   cancelClicked = (event) => {

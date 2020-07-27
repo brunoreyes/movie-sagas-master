@@ -17,14 +17,8 @@ class MovieList extends Component {
       <div>
         {/* <pre>{JSON.stringify(this.props.reduxState.movies)}</pre> */}
 
-        <Grid
-          container
-          direction="row"
-          justify="flex-start"
-          alignItems="flex-start"
-        >
+        <Grid direction="row" justify="flex-start" alignItems="flex-start">
           {/* mapping each item within the array and them calling them searchItem */}
-
           {this.props.reduxState.movies.map((movieItem, index) => (
             <MovieListItem
               key={index}
