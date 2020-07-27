@@ -23,22 +23,22 @@ function* getMovies() {
   }
 }
 
-function* detailMovies(action) {
-  // make sure to put action up top because we are passing i5 through detailMovies
-  try {
-    console.log(`this is action.payload in detailMovies:${action.payload}`);
+// function* detailMovies(action) {
+//   // make sure to put action up top because we are passing i5 through detailMovies
+//   try {
+//     console.log(`this is action.payload in detailMovies:${action.payload}`);
 
-    const response = yield axios.get(`/api/display/detail/${action.payload}`);
-    //   Changed the bottom for the top
-    // const response = yield axios.get(
-    //     `/api/display/detail/:id`
-    //   );
-    yield console.log('This is what we get from axios.get: ', response.data);
-    yield put({ type: 'DETAIL_MOVIE', payload: response.data });
-  } catch (error) {
-    console.log('Trouble getting movie details to display', error);
-  }
-}
+//     const response = yield axios.get(`/api/display/detail/${action.payload}`);
+//     //   Changed the bottom for the top
+//     // const response = yield axios.get(
+//     //     `/api/display/detail/:id`
+//     //   );
+//     yield console.log('This is what we get from axios.get: ', response.data);
+//     yield put({ type: 'DETAIL_MOVIE', payload: response.data });
+//   } catch (error) {
+//     console.log('Trouble getting movie details to display', error);
+//   }
+// }
 
 function* editMovies(action) {
   // make sure to put action up top because we are passing i5 through detailMovies
@@ -60,7 +60,7 @@ function* editMovies(action) {
 // Create the rootSaga generator function
 function* rootSaga() {
   yield takeEvery('FETCH_MOVIES', getMovies);
-  yield takeEvery('FETCH_DETAIL', detailMovies);
+  // yield takeEvery('FETCH_DETAIL', detailMovies);
   yield takeEvery('FETCH_EDIT', editMovies);
 
   //   yield takeEvery('SET_CATEGORY', updateMovies);
@@ -89,10 +89,10 @@ const genres = (state = [], action) => {
 };
 
 const details = (state = [], action) => {
-  console.log('in details', state, action.type);
+  console.log('in details', state, action.payload);
 
   switch (action.type) {
-    case 'DETAIL_MOVIE':
+    case 'FETCH_DETAIL':
       return action.payload;
     default:
       return state;

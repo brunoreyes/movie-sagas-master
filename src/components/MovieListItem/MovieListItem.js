@@ -6,8 +6,16 @@ import {
 } from '@material-ui/core';
 class MovieListItem extends Component {
   clickhandler = () => {
+    // change the page to the Details/movieID url
     this.props.history.push(`/Detail/${this.props.movieItem.id}`);
     // changed this :this.props.history.push('/Detail/${id}') to whats on top to specify the actual id
+
+    // dispatch the selected movie (the one that's clicked on) to your "details" redux state
+    this.props.dispatch({
+      type: 'FETCH_DETAIL',
+      payload: this.props.movieItem,
+      //
+    });
   };
 
   render() {
