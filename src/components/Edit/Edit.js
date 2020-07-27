@@ -5,8 +5,9 @@ import Button from '@material-ui/core/Button';
 
 class Edit extends Component {
   state = {
-    name: '',
+    title: '',
     description: '',
+    id: this.props.match.params.id,
   };
 
   componentDidMount() {
@@ -19,16 +20,24 @@ class Edit extends Component {
   }
   saveChangesClicked = (event) => {
     console.log('In Save Changes clicked');
+    console.log('this.state', this.state);
 
     this.props.dispatch({
-      type: 'SET_MOVIES',
-      payload: this.state,
+      type: 'FETCH_EDIT',
+      payload: {
+        id: this.state.id,
+        title: this.state.title,
+        description: this.state.description,
+      },
     });
 
     // this.props.history.path is going to bring
     // the user into the next part of the feedback form (understanding)
     // which is a route listed within App.js's router
-    this.props.history.push(`/Detail/${this.props.reduxState.details.id}`);
+
+    this.props.history.push(`/`);
+
+    // this.props.history.push(`/Detail/${this.props.reduxState.details.id}`);
   }; // end nextClicked
 
   cancelClicked = (event) => {
@@ -46,13 +55,13 @@ class Edit extends Component {
     this.props.history.push(`/Detail/${this.props.reduxState.details.id}`);
   };
 
-  textInput = (event) => {
+  textInput = (event, propertyName) => {
     console.log('in textInput, value:', event.target.value);
 
     // this.setState sets the state's comment property = to the user's input
     this.setState({
-      name: event.target.value,
-      description: event.target.value,
+      ...this.state,
+      [propertyName]: event.target.value,
     });
   };
 
@@ -62,30 +71,34 @@ class Edit extends Component {
         <img src={this.props.reduxState.details.poster}></img>
         <br></br>
         <TextField
-          // placeholder="Title"
-          defaultValue={this.props.reduxState.details.title}
-          onChange={this.textInput}
+          placeholder="Title"
+          // defaultValue={this.props.reduxState.details.title}
+          onChange={(event) => this.textInput(event, 'title')}
           label="Title"
           variant="filled"
           id="filled-basic"
         ></TextField>
         <br></br>
-
         <TextField
-          // placeholder="Description"
-          defaultValue={this.props.reduxState.details.description}
-          onChange={this.textInput}
+          placeholder="Description"
+          // defaultValue={this.props.reduxState.details.description}
+          onChange={(event) => this.textInput(event, 'description')}
           label="Description"
           variant="filled"
           id="filled-basic"
         ></TextField>
         <br></br>
         <br></br>
-
-        <Button variant="contained" onClick={this.cancelClicked}>
+        <Button
+          variant="contained"
+          onClick={(event) => this.cancelClicked(event, 'title')}
+        >
           Cancel
         </Button>
-        <Button variant="contained" onClick={this.saveChangesClicked}>
+        <Button
+          variant="contained"
+          onClick={(event) => this.saveChangesClicked(event, 'title')}
+        >
           Save Changes
         </Button>
       </div>

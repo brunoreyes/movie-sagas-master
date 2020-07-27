@@ -20,6 +20,10 @@ class Detail extends Component {
     this.props.history.push(`/Edit/${this.state.id}`);
     // changed this :this.props.history.push('/Detail/${id}') to whats on top to specify the actual id
   };
+  backClicked = () => {
+    this.props.history.push(`/`);
+    // changed this :this.props.history.push('/Detail/${id}') to whats on top to specify the actual id
+  };
 
   render() {
     return (
@@ -39,14 +43,14 @@ class Detail extends Component {
             {/* <p>{this.props.reduxState.details.array_agg}</p> */}
 
             {this.props.reduxState.details.array_agg.map((genre, index) => (
-              <p key={index}>{genre}</p>
+              <pre key={index}>{genre}</pre>
             ))}
             <p>{this.props.reduxState.details.description}</p>
 
             <Button
               className="Button"
               variant="contained"
-              onClick={this.editClicked}
+              onClick={this.backClicked}
             >
               BACK
             </Button>

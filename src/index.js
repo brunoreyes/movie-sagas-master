@@ -42,18 +42,24 @@ function* getMovies() {
 
 function* editMovies(action) {
   // make sure to put action up top because we are passing i5 through detailMovies
-  try {
-    console.log(`this is action.payload in editMovies:${action.payload}`);
+  //   try {
+  //     console.log(`this is action.payload in editMovies:${action.payload}`);
 
-    const response = yield axios.get(`/api/display/edit/${action.payload}`);
-    //   Changed the bottom for the top
-    // const response = yield axios.get(
-    //     `/api/display/detail/:id`
-    //   );
-    yield console.log('This is what we get from axios.get: ', response.data);
-    yield put({ type: 'EDIT_MOVIE', payload: response.data });
-  } catch (error) {
-    console.log('Trouble getting movie details to display', error);
+  //     const response = yield axios.get(`/api/display/edit/${action.payload}`);
+  //     //   Changed the bottom for the top
+  //     // const response = yield axios.get(
+  //     //     `/api/display/detail/:id`
+  //     //   );
+  //     yield console.log('This is what we get from axios.get: ', response.data);
+  //     yield put({ type: 'EDIT_MOVIE', payload: response.data });
+  //   } catch (error) {
+  //     console.log('Trouble getting movie details to display', error);
+  //   }
+  // }
+  try {
+    yield axios.put('/api/display', action.payload);
+  } catch (err) {
+    console.log('error', err);
   }
 }
 

@@ -52,25 +52,41 @@ router.get('/', (req, res) => {
 // });
 
 // // update given favorite with a category id
-router.put('/edit/:id', async (req, res) => {
-  //we want to see information
-  console.log('In Edit Put');
-  console.log('req.body', req.body);
+// router.put('/', async (req, res) => {
+//   //we want to see information
+//   // console.log('In Edit Put');
+//   // console.log('req.body', req.body);
 
-  const client = Number(req.body.value);
-  const id = req.body.id;
-  console.log(category_id);
-  console.log(id);
+//   const client = Number(req.body.value);
+//   const id = req.body.id;
+//   console.log(category_id);
+//   console.log(id);
 
-  let queryString = `UPDATE * FROM movies WHERE id=$1;`;
+//   let queryString = `UPDATE * FROM movies WHERE id=$1;`;
+//   pool
+//     .query(queryString, [category_id, id])
+//     .then((response) => {
+//       console.log('Response from db', response);
+//       res.sendStatus(201);
+//     })
+//     .catch((err) => {
+//       console.log('Error from db', err);
+//       res.sendStatus(500);
+//     });
+// });
+
+router.put('/', (req, res) => {
+  console.log('req.body is', req.body);
+  const queryText = `UPDATE movies SET title=$1, description=$2 WHERE id=$3;`;
+  const queryValues = [req.body.title, req.body.description, req.body.id];
   pool
-    .query(queryString, [category_id, id])
-    .then((response) => {
-      console.log('Response from db', response);
-      res.sendStatus(201);
+    .query(queryText, queryValues)
+    .then((result) => {
+      console.log('in /api/display/edit PUT');
+      res.send(result.rows);
     })
-    .catch((err) => {
-      console.log('Error from db', err);
+    .catch((error) => {
+      console.log(`PUT error:`, error);
       res.sendStatus(500);
     });
 });
