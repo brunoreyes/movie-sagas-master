@@ -11,6 +11,11 @@ class Detail extends Component {
       //
     });
   }
+    
+  editClicked = () => {
+    this.props.history.push(`/Edit/${this.props.movieItem.id}`);
+    // changed this :this.props.history.push('/Detail/${id}') to whats on top to specify the actual id
+  };
   //   handleEdit = () => {
   //     // TODO: Clear the cart and navigate to the product page
 
