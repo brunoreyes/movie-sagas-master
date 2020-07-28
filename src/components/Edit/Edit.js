@@ -10,17 +10,20 @@ class Edit extends Component {
     id: this.props.match.params.id,
   };
 
-  componentDidMount() {
-    // use component did mount to dispatch an action to request the SearchList from the API
-    this.props.dispatch({
-      type: 'SET_MOVIES',
-      payload: this.props.match.params.id,
-      //
-    });
-  }
+  // componentDidMount() {
+  //   // use component did mount to dispatch an action to request the SearchList from the API
+  //   this.props.dispatch({
+  //     type: 'SET_MOVIES',
+  //     payload: this.props.match.params.id,
+  //     //
+  //   });
+  // }
+
   saveChangesClicked = (event) => {
     console.log('In Save Changes clicked');
     console.log('this.state', this.state);
+
+    // this.props.dispatch({action}) action is an action.object
 
     this.props.dispatch({
       type: 'FETCH_EDIT',
@@ -29,25 +32,29 @@ class Edit extends Component {
         title: this.state.title,
         description: this.state.description,
       },
+      newDetails: {
+        poster: this.props.reduxState.details.poster,
+        id: this.state.id,
+        title: this.state.title,
+        description: this.state.description,
+        array_agg: this.props.reduxState.details.array_agg,
+      },
     });
 
-    // this.props.history.path is going to bring
+    // this.props.history.push is going to bring
     // the user into the next part of the feedback form (understanding)
     // which is a route listed within App.js's router
 
-    this.props.history.push(`/`);
-
-    // this.props.history.push(`/Detail/${this.props.reduxState.details.id}`);
-    // this.props.history.push(`/Detail/${this.props.match.params.id}`);
+    this.props.history.push(`/Detail/${this.props.match.params.id}`);
   }; // end nextClicked
 
   cancelClicked = (event) => {
     console.log('In Cancel clicked');
 
-    this.props.dispatch({
-      type: 'SET_MOVIES',
-      payload: this.state,
-    });
+    // this.props.dispatch({
+    //   type: 'SET_MOVIES',
+    //   payload: this.props.details,
+    // });
 
     // this.props.history.path is going to bring
     // the user into the next part of the feedback form (understanding)

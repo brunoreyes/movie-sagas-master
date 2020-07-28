@@ -1,9 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import {
-  Paper,
-  // Paper, Slide, Typography
-} from '@material-ui/core';
+import {Paper} from '@material-ui/core';
 class MovieListItem extends Component {
   clickhandler = () => {
     // change the page to the Details/movieID url
@@ -21,7 +18,6 @@ class MovieListItem extends Component {
   render() {
     return (
       <div className="movieContainer">
-        {/* <pre>{JSON.stringify(`this is the details section:`)}</pre> */}
         {/* <pre>{JSON.stringify(this.props.reduxState.details)}</pre> */}
         <Paper elevation={3}>
           <img

@@ -12,7 +12,6 @@ import { takeEvery, put } from 'redux-saga/effects';
 // Import saga middleware
 import createSagaMiddleware from 'redux-saga';
 
-// ------------ THESE ARE OUR (SAGAs) GENERATOR FUNCTIONS --------------
 function* getMovies() {
   try {
     const response = yield axios.get('/api/display');
@@ -22,7 +21,6 @@ function* getMovies() {
     console.log('Trouble getting movies to display', error);
   }
 }
-
 // function* detailMovies(action) {
 //   // make sure to put action up top because we are passing i5 through detailMovies
 //   try {
@@ -58,6 +56,11 @@ function* editMovies(action) {
   // }
   try {
     yield axios.put('/api/display', action.payload);
+    yield put({ type: 'FETCH_DETAIL', payload: action.newDetails });
+    // // this is all the usual steps we had in the get movies's try
+    // const response = yield axios.get('/api/display');
+    // yield console.log('This is what we get from axios.get: ', response.data);
+    // yield put({ type: 'SET_MOVIES', payload: response.data });
   } catch (err) {
     console.log('error', err);
   }
@@ -68,8 +71,6 @@ function* rootSaga() {
   yield takeEvery('FETCH_MOVIES', getMovies);
   // yield takeEvery('FETCH_DETAIL', detailMovies);
   yield takeEvery('FETCH_EDIT', editMovies);
-
-  //   yield takeEvery('SET_CATEGORY', updateMovies);
 }
 
 // ------------ THESE ARE OUR REDUCERS --------------
