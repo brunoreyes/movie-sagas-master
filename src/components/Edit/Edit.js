@@ -10,15 +10,6 @@ class Edit extends Component {
     id: this.props.match.params.id,
   };
 
-  // componentDidMount() {
-  //   // use component did mount to dispatch an action to request the SearchList from the API
-  //   this.props.dispatch({
-  //     type: 'SET_MOVIES',
-  //     payload: this.props.match.params.id,
-  //     //
-  //   });
-  // }
-
   saveChangesClicked = (event) => {
     console.log('In Save Changes clicked');
     console.log('this.state', this.state);

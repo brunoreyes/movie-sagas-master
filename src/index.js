@@ -97,7 +97,6 @@ const genres = (state = [], action) => {
 
 const details = (state = [], action) => {
   console.log('in details', state, action.payload);
-
   switch (action.type) {
     case 'FETCH_DETAIL':
       return action.payload;
