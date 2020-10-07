@@ -23,7 +23,7 @@ class MovieListItem extends Component {
           onClick={() => {
             this.props.handleMovieItemClicked(this.props.movieItem);
           }}
-          className={classes.movieThumbnail}
+          className={classes.moviePoster}
         ></img>
       </div>
     );

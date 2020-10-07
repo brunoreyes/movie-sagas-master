@@ -18,6 +18,7 @@ import styles from '../../themes/movieTheme';
 import AccessTimeIcon from '@material-ui/icons/AccessTime';
 import Fade from 'react-reveal/Fade';
 import PlayCircleFilledIcon from '@material-ui/icons/PlayCircleFilled';
+import CancelIcon from '@material-ui/icons/Cancel';
 // import GenreSelector from '../GenreSelector';
 
 class MovieList extends Component {
@@ -37,8 +38,10 @@ class MovieList extends Component {
     duration: '2h 43m',
     rating: 'R',
     genres: ['Adventure', 'Drama', 'Action'],
+    trailerMode: false,
+    show: false,
     // So we used json_agg to turn what we got back from SQL, and then we mapped out from there, since it was an array: []
-    // and not an object
+    // and not an object: {}
   };
   handleMovieItemClicked = (movieItem) => {
     this.setState({
@@ -55,6 +58,12 @@ class MovieList extends Component {
     });
     console.log('edit was clicked! Task state:', movieItem);
   };
+  toggleTrailerMode = () => {
+    this.setState({
+      trailerMode: !this.state.trailerMode,
+      show: !this.state.show,
+    });
+  };
 
   render() {
     const { classes } = this.props;
@@ -68,19 +77,39 @@ class MovieList extends Component {
               <br></br>
               <p className={classes.miviLogo}>MIVI</p>
               <Fade key={this.state.id}>
-                <Typography
-                  className={classes.movieTitle}
-                  variant="h1"
-                  color="inherit"
-                >
-                  {this.state.title}
+                <Typography className={classes.movieTitle}>
+                  {this.state.title}{' '}
+                  {this.state.trailerMode ? (
+                    <IconButton
+                      aria-label="close trailer"
+                      onClick={this.toggleTrailerMode}
+                      title="close trailer"
+                    >
+                      <CancelIcon className={classes.iconClose} title="Demo" />
+                    </IconButton>
+                  ) : (
+                    <IconButton
+                      aria-label="play trailer"
+                      onClick={this.toggleTrailerMode}
+                      title="play trailer"
+                    >
+                      <PlayCircleFilledIcon className={classes.iconPlay} />
+                    </IconButton>
+                  )}
                 </Typography>
 
                 <Typography className={classes.description}>
                   {/* {textTruncate(movie.description, 450)} */}{' '}
                   {this.state.description}
                 </Typography>
-                <div className={classes.directedTimeGenres}>
+                <div
+                  // className={classes.directedTimeGenres}
+                  className={
+                    this.state.trailerMode
+                      ? classes.directedTimeGenresClose
+                      : classes.directedTimeGenres
+                  }
+                >
                   <Typography className={classes.director}>
                     Directed By {this.state.director}{' '}
                   </Typography>
@@ -97,217 +126,23 @@ class MovieList extends Component {
                           {genre}{' '}
                         </Typography>
                       ))}{' '}
-                  {/* <div className={classes.sectionVideoContainer}>
-                    <iframe
-                      allowfullscreen="allowfullscreen"
-                      webkitallowfullscreen="true"
-                      mozallowfullscreen="true"
-                      title={'section video'}
-                      frameborder="0"
-                      className={classes.sectionVideo}
-                      src={
-                        this.state.trailer
-                          .replace('watch?v=', 'embed/')
-                          .split('&feature=emb_title')[0]
-                      }
-                    ></iframe>
-                  </div>{' '} */}
-                  <IconButton
-                    aria-label="demo"
-                    // className={classes.iconLight}
-                  >
-                    <PlayCircleFilledIcon
-                      className={classes.iconLight}
-                      title="Demo"
-                    />
-                  </IconButton>{' '}
-                  <div
-                    style={this.state.messageMode ? {} : { display: 'none' }}
-                  >
-                    <div className={classes.form}>
-                      <form
-                        onSubmit={this.sendEmail}
-                        className="gform "
-                        method="POST"
-                        data-email="bruno619reyes@gmail.com"
-                        action="https://script.google.com/macros/s/AKfycbxtcbHlRFTg6H0rcFU2dNnHZNdyabfR3uKLE7Tv06TyA71Cy6Y/exec"
-                      >
-                        {' '}
-                        <span
-                          className={
-                            this.state.darkMode
-                              ? classes.formTitleLight
-                              : classes.formTitle
-                          }
-                        >
-                          Let's Chat
-                        </span>{' '}
-                        <Button
-                          onClick={this.handleClose}
-                          className={
-                            this.state.darkMode
-                              ? classes.formButtonExitLight
-                              : classes.formButtonExit
-                          }
-                          title="Exit Messenger"
-                        >
-                          X
-                        </Button>
-                        <div className="form-elements" id="form-elements">
-                          <TextField
-                            autoFocus
-                            margin="dense"
-                            label={
-                              <span
-                                className={
-                                  this.state.darkMode
-                                    ? classes.formLabelsLight
-                                    : classes.formLabels
-                                }
-                              >
-                                Email Address
-                              </span>
-                            }
-                            name="email"
-                            id="email"
-                            type="email"
-                            fullWidth
-                            variant="outlined"
-                            InputProps={
-                              this.state.darkMode
-                                ? {
-                                    classes: {
-                                      input: classes.inputLight,
-
-                                      notchedOutline:
-                                        classes.notchedOutlineLight,
-                                    },
-                                  }
-                                : {
-                                    classes: {
-                                      input: classes.input,
-                                      notchedOutline: classes.notchedOutline,
-                                    },
-                                  }
-                            }
-                          />
-                          <TextField
-                            autoFocus
-                            margin="dense"
-                            label={
-                              <span
-                                className={
-                                  this.state.darkMode
-                                    ? classes.formLabelsLight
-                                    : classes.formLabels
-                                }
-                              >
-                                Name
-                              </span>
-                            }
-                            id="name"
-                            name="name"
-                            type="text"
-                            fullWidth
-                            variant="outlined"
-                            InputProps={
-                              this.state.darkMode
-                                ? {
-                                    classes: {
-                                      input: classes.inputLight,
-                                      notchedOutline:
-                                        classes.notchedOutlineLight,
-                                    },
-                                  }
-                                : {
-                                    classes: {
-                                      input: classes.input,
-                                      notchedOutline: classes.notchedOutline,
-                                    },
-                                  }
-                            }
-                          />
-                          <TextField
-                            autoFocus
-                            variant="outlined"
-                            margin="dense"
-                            label={
-                              <span
-                                className={
-                                  this.state.darkMode
-                                    ? classes.formLabelsLight
-                                    : classes.formLabels
-                                }
-                              >
-                                Message
-                              </span>
-                            }
-                            name="message"
-                            id="message"
-                            type="text"
-                            fullWidth
-                            multiline
-                            rows={4}
-                            InputProps={
-                              this.state.darkMode
-                                ? {
-                                    classes: {
-                                      input: classes.inputLight,
-                                      notchedOutline:
-                                        classes.notchedOutlineLight,
-                                    },
-                                  }
-                                : {
-                                    classes: {
-                                      input: classes.input,
-                                      notchedOutline: classes.notchedOutline,
-                                    },
-                                  }
-                            }
-                          />
-                          <input
-                            id="honeypot"
-                            type="text"
-                            name="honeypot"
-                            className="honeypot-field"
-                            hidden
-                          />
-                        </div>
-                        <div className={classes.formButtonContainer}>
-                          <Button
-                            onClick={this.handleClose}
-                            className={
-                              this.state.darkMode
-                                ? classes.formButtonLight
-                                : classes.formButton
-                            }
-                          >
-                            Cancel
-                          </Button>
-                          <Button
-                            onClick={() => {
-                              this.handleClose();
-                              this.handleSend();
-                            }}
-                            className={
-                              this.state.darkMode
-                                ? classes.formButtonRightLight
-                                : classes.formButtonRight
-                            }
-                            type="submit"
-                            value="Send"
-                          >
-                            Send
-                          </Button>
-                        </div>
-                      </form>
-                      <script
-                        data-cfasync="false"
-                        type="text/javascript"
-                        src="formSubmissionHandler.js"
-                      ></script>
-                    </div>
-                  </div>
+                  <Fade left opposite when={this.state.show}>
+                    <div className={classes.sectionVideoContainer}>
+                      <iframe
+                        allowfullscreen="allowfullscreen"
+                        webkitallowfullscreen="true"
+                        mozallowfullscreen="true"
+                        title={'section video'}
+                        frameborder="0"
+                        className={classes.sectionVideo}
+                        src={
+                          this.state.trailer
+                            .replace('watch?v=', 'embed/')
+                            .split('&feature=emb_title')[0]
+                        }
+                      ></iframe>
+                    </div>{' '}
+                  </Fade>
                 </div>
               </Fade>
             </header>{' '}
@@ -320,10 +155,8 @@ class MovieList extends Component {
               }}
             />{' '}
           </Fade>
-          <Fade key={this.state.id}>
+          <Fade key={this.state.id} opposite when={this.state.show === false}>
             <div className={classes.movieActions}>
-              {' '}
-              {/* <GenreSelector className={classes.genreSelector} /> */}
               <Typography className={classes.rating}>
                 {' '}
                 {this.state.rating}
@@ -351,7 +184,6 @@ class MovieList extends Component {
                     <MovieListItem
                       key={index}
                       history={this.props.history}
-                      //   We need to pass history down to movie list item
                       movieItem={movieItem}
                       handleMovieItemClicked={this.handleMovieItemClicked}
                     />
