@@ -8,25 +8,18 @@ require('dotenv').config();
 // return all favorite images
 router.get('/', (req, res) => {
   // const displayQuery = `SELECT * FROM movies ORDER BY title ASC;`;
-  const displayQuery = `SELECT movies.id, title, description, poster, array_agg(genres.name)
+  const displayQuery = `SELECT movies.id, title, description, poster, cover, director, duration, rating, trailer, json_agg(genres.name) AS genres
   FROM movies
   JOIN movie_genre on movies.id = movie_genre.movie_id
   JOIN genres ON movie_genre.genre_id = genres.id
   GROUP BY movies.id
   ORDER BY title ASC;`;
-
-  // const queryText = `SELECT movies.id, title, description, poster, array_agg(genres.name)
-  // FROM movies
-  // JOIN movie_genre on movies.id = movie_genre.movie_id
-  // JOIN genres ON movie_genre.genre_id = genres.id
-  // GROUP BY movies.id
-  // ORDER BY title ASC;`;
   //pool is our connection to the database
   //we are going to query a queryString command to pool (database)
   pool
     .query(displayQuery)
     .then((response) => {
-      // console.log('Sending response:', response.rows);
+      console.log('Sending response:', response.rows);
       res.send(response.rows);
     })
     .catch((error) => {
