@@ -1,5 +1,7 @@
 # MIVI
 
+View Demo [Here](https://guarded-meadow-81558.herokuapp.com/#/)
+
 ## Project Description
 
 I created an application that allows users to:
@@ -11,8 +13,6 @@ I created an application that allows users to:
 - Intuitively navigate through a sound user expereince.
 
 ### Duration: 2 Weeks
-
-## Screen Shots
 
 ### Preview
 
