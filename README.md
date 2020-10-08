@@ -16,7 +16,7 @@ I created an application that allows users to:
 
 ### Preview
 
-![Preview](https://tinyurl.com/y2h564ht)
+![App Preview](mivi.gif)
 
 ## Prerequisites
 
