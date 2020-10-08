@@ -1,6 +1,6 @@
 # MIVI
 
-View Demo [Here](https://guarded-meadow-81558.herokuapp.com/#/)
+### View Demo [Here](https://guarded-meadow-81558.herokuapp.com/#/)
 
 ## Project Description
 
@@ -12,7 +12,7 @@ I created an application that allows users to:
 - Edit any movie to update any movie info including trailer links
 - Intuitively navigate through a sound user expereince.
 
-### Duration: 2 Weeks
+### Duration: 1 Weeks
 
 ### Preview
 
