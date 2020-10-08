@@ -6,11 +6,11 @@
 
 I created an application that allows users to:
 
-- View multiple movies information without having to leave the page
-- Show and Hide movie trailers
-- Scroll through movies horizontally like on Netflix
-- Edit any movie to update any movie info including trailer links
-- Intuitively navigate through a sound user expereince.
+- View info on all movies without having to leave the page.
+- Show and hide movie trailers.
+- Scroll through movies horizontally like on Netflix.
+- Edit and update any movie info.
+- Intuitively navigate through a sound user experience.
 
 ### Duration: 1 Weeks
 
