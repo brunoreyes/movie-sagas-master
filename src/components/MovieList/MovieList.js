@@ -1,17 +1,11 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import {
-  Grid,
   GridList,
   GridListTile,
   withStyles,
-  // , Slide,
   Typography,
-  // Link,
-  Button,
-  FormControl,
   IconButton,
-  TextField,
 } from '@material-ui/core';
 import MovieListItem from '../MovieListItem/MovieListItem';
 import styles from '../../themes/movieTheme';
@@ -19,15 +13,13 @@ import AccessTimeIcon from '@material-ui/icons/AccessTime';
 import Fade from 'react-reveal/Fade';
 import PlayCircleFilledIcon from '@material-ui/icons/PlayCircleFilled';
 import CancelIcon from '@material-ui/icons/Cancel';
-// import GenreSelector from '../GenreSelector';
+// import { Roll, Zoom, Rotate, Flip } from 'react-reveal';
 
 class MovieList extends Component {
   componentDidMount() {
-    // use component did mount to dispatch an action to request the SearchList from the API
     this.props.dispatch({ type: 'FETCH_MOVIES' });
   }
   state = {
-    id: '',
     title: '007 Collection',
     poster: 'images/jamesBondPoster.png',
     description:
@@ -40,8 +32,6 @@ class MovieList extends Component {
     genres: ['Adventure', 'Drama', 'Action'],
     trailerMode: false,
     show: false,
-    // So we used json_agg to turn what we got back from SQL, and then we mapped out from there, since it was an array: []
-    // and not an object: {}
   };
   handleMovieItemClicked = (movieItem) => {
     this.setState({
@@ -56,7 +46,7 @@ class MovieList extends Component {
       rating: movieItem.rating,
       genres: movieItem.genres,
     });
-    console.log('edit was clicked! Task state:', movieItem);
+    // console.log('handleMovieItemClicked was clicked! movieItem:', movieItem);
   };
   toggleTrailerMode = () => {
     this.setState({
@@ -67,78 +57,76 @@ class MovieList extends Component {
 
   render() {
     const { classes } = this.props;
-
     return (
-      <div className={classes.background}>
-        <div className={classes.movieHero}>
-          {' '}
+      <div className={classes.screenBackground}>
+        <div className={classes.hero}>
           <div className={classes.infoSection}>
-            <header className={classes.coverContentHolder}>
-              <br></br>
-              <p className={classes.miviLogo}>MIVI</p>
+            <header className={classes.leftMovieInfoContainer}>
+              <Fade top cascade>
+                <p className={classes.miviLogo}>MIVI</p>
+              </Fade>
               <Fade key={this.state.id}>
-                <Typography className={classes.movieTitle}>
+                <Typography className={classes.title}>
                   {this.state.title}{' '}
                   {this.state.trailerMode ? (
                     <IconButton
-                      aria-label="close trailer"
+                      aria-label="close movie trailer"
                       onClick={this.toggleTrailerMode}
-                      title="close trailer"
+                      title="close movie trailer"
                     >
-                      <CancelIcon className={classes.iconClose} title="Demo" />
+                      <CancelIcon className={classes.iconButton} title="Demo" />
                     </IconButton>
                   ) : (
                     <IconButton
-                      aria-label="play trailer"
+                      aria-label="play movie trailer"
                       onClick={this.toggleTrailerMode}
-                      title="play trailer"
+                      title="play movie trailer"
                     >
-                      <PlayCircleFilledIcon className={classes.iconPlay} />
+                      <PlayCircleFilledIcon className={classes.iconButton} />
                     </IconButton>
                   )}
                 </Typography>
-
                 <Typography className={classes.description}>
                   {/* {textTruncate(movie.description, 450)} */}{' '}
                   {this.state.description}
                 </Typography>
                 <div
-                  // className={classes.directedTimeGenres}
                   className={
                     this.state.trailerMode
                       ? classes.directedTimeGenresClose
                       : classes.directedTimeGenres
                   }
                 >
+                  {' '}
                   <Typography className={classes.director}>
-                    Directed By {this.state.director}{' '}
+                    Directed By {this.state.director}
                   </Typography>
                   <Typography className={classes.duration}>
-                    <AccessTimeIcon className={classes.timeIcon} />
-
-                    <span> </span>
+                    <AccessTimeIcon className={classes.durationIcon} />
                     {this.state.duration}
                   </Typography>{' '}
+                  {/*  In postgreSQL I used json_agg to receive an array of
+                  genres: [], and then I mapped them out, not an object: {} */}
                   {this.state.genres === []
                     ? 'please wait..'
                     : this.state.genres.map((genre, index) => (
                         <Typography className={classes.genre} key={index}>
-                          {genre}{' '}
+                          {genre}
                         </Typography>
                       ))}{' '}
                   <Fade left opposite when={this.state.show}>
-                    <div className={classes.sectionVideoContainer}>
+                    <div className={classes.trailerContainer} allowfullscreen>
                       <iframe
-                        allowfullscreen="allowfullscreen"
-                        webkitallowfullscreen="true"
-                        mozallowfullscreen="true"
-                        title={'section video'}
+                        title={`${this.state.title} movie trailer`}
                         frameborder="0"
-                        className={classes.sectionVideo}
+                        // diable={true}
+                        // style="display:none;"
+                        className={classes.trailer}
+                        // I emptied out the source in case anyone was to hover over the hidden video
                         src={
-                          this.state.trailer
-                            .replace('watch?v=', 'embed/')
-                            .split('&feature=emb_title')[0]
+                          this.state.trailerMode
+                            ? this.state.trailer.replace('watch?v=', 'embed/')
+                            : ''
                         }
                       ></iframe>
                     </div>{' '}
@@ -149,57 +137,42 @@ class MovieList extends Component {
           </div>{' '}
           <Fade key={this.state.id}>
             <div
-              className={classes.blurBackground}
+              className={classes.blurredCover}
               style={{
                 backgroundImage: `url(${this.state.cover})`,
               }}
             />{' '}
           </Fade>
-          <Fade key={this.state.id} opposite when={this.state.show === false}>
-            <div className={classes.movieActions}>
+          <Fade key={this.state.id} when={this.state.show === false}>
+            <div className={classes.rightMovieInfoContainer}>
               <Typography className={classes.rating}>
-                {' '}
                 {this.state.rating}
               </Typography>{' '}
             </div>
           </Fade>
         </div>
-
-        <Grid
-          direction="row"
-          justify="flex-start"
-          alignItems="flex-start"
-          className={classes.grid}
-        >
-          {/* mapping each item within the array and them calling them searchItem */}
-          <GridList
-            className={classes.gridList}
-            cols={window.screen.width < 600 ? 2 : 6.3}
-            cellHeight={'100%'}
-          >
-            {this.props.reduxState.movies === []
-              ? 'please wait..'
-              : this.props.reduxState.movies.map((movieItem, index) => (
-                  <GridListTile onClick={this.handleFade}>
+        <GridList className={classes.gridList} cols={6.3} cellHeight={'100%'}>
+          {this.props.reduxState.movies === []
+            ? 'please wait..'
+            : this.props.reduxState.movies.map((movieItem, index) => (
+                <GridListTile onClick={this.handleFade}>
+                  <Fade>
                     <MovieListItem
                       key={index}
                       history={this.props.history}
                       movieItem={movieItem}
                       handleMovieItemClicked={this.handleMovieItemClicked}
-                    />
-                  </GridListTile>
-                ))}
-          </GridList>
-        </Grid>
+                    />{' '}
+                  </Fade>
+                </GridListTile>
+              ))}
+        </GridList>
         {/* <pre>{JSON.stringify(this.props.reduxState.searchName)}</pre> */}
       </div>
     );
   }
 }
-
 const mapStateToProps = (reduxState) => ({
   reduxState,
-  movieItem: reduxState.movieItem,
 });
-
 export default withStyles(styles)(connect(mapStateToProps)(MovieList));

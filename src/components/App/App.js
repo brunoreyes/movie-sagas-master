@@ -1,7 +1,11 @@
 import React, { Component } from 'react';
 import './App.css';
 import MovieList from '../MovieList/MovieList';
-import { HashRouter as Router, Route, Link } from 'react-router-dom';
+import {
+  HashRouter as Router,
+  Route,
+  // Link
+} from 'react-router-dom';
 import Detail from '../Detail/Detail.js';
 import Edit from '../Edit/Edit.js';
 

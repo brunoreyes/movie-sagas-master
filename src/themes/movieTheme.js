@@ -1,79 +1,70 @@
 const styles = (theme) => ({
-  root: {
-    flexGrow: 1,
-  },
-
-  background: {
-    // flexGrow: 1,
+  screenBackground: {
     backgroundColor: '#010102',
     width: '101%',
     height: '106vh',
   },
-  movieHero: {
+  hero: {
     position: 'relative',
-
-    // height: (props) => (props.height ? props.height : '100%'),
     height: '60vh',
-    marginBottom: '1.5%',
-    marginTop: '-1.5%',
-    // marginTop: '1%',
+    margin: '-1.5% 0% 1.5% 0%',
     width: '100%',
-    color: theme.palette.common.white,
-    backgroundColor: theme.palette.background.dark,
-    // borderBottom: '4px solid white',
   },
-  blurBackground: {
+  blurredCover: {
     position: 'absolute',
     top: 0,
     height: '56vh',
     right: 0,
     backgroundSize: 'cover',
-    backgroundRepeat: 'no-repeat',
+    // backgroundRepeat: 'no-repeat',
     marginTop: '2%',
     width: '65%',
   },
   infoSection: {
-    marginTop: '1%',
     position: 'relative',
     display: 'flex',
     alignItems: 'center',
     width: '100%',
     height: '60vh',
-    backgroundBlendMode: 'multiply',
     background:
       'linear-gradient(to right, rgba(0,0,0,2) 34%, transparent 100%)',
     zIndex: 2,
     marginTop: '-4%',
   },
-  coverContentHolder: {
+  leftMovieInfoContainer: {
     position: 'relative',
     maxWidth: '60%',
     'text-align': 'left',
     marginBottom: '-5%',
   },
   miviLogo: {
-    marginTop: '0%',
-    marginLeft: '-.5%',
-    'margin-bottom': '-5%',
+    transition: '.5s',
+    margin: '2% 0% -7% -.5%',
     font: '300 220% Roboto, sans-serif',
     color: '#e50a15',
-
     'letter-spacing': '-1.5px',
   },
-  movieTitle: {
+  title: {
     transition: '.5s',
     maxWidth: '80%',
     textTransform: 'uppercase',
-    marginTop: '0%',
-    marginBottom: '-5%',
+    margin: '3% 0% -6% 0%',
     font: '400 170% Roboto, sans-serif',
     'letter-spacing': '-.5px',
     color: '#fff',
   },
-
+  iconButton: {
+    'font-size': '40px',
+    marginBottom: '10%',
+    color: '#fff',
+    '&:hover': {
+      transition: '.5s',
+      color: '#e50a15',
+    },
+  },
   description: {
     marginTop: '0%',
-    marginBottom: '-7%',
+    marginBottom: '-10%',
     color: '#fff',
     lineHeight: 1.4,
     minHeight: '25vh',
@@ -83,13 +74,11 @@ const styles = (theme) => ({
     font: '300 90% Roboto, sans-serif',
   },
   directedTimeGenres: {
-    marginTop: '-8%',
-    marginBottom: '8%',
+    margin: '-8% 0% 8% 0%',
     width: '110%',
   },
   directedTimeGenresClose: {
-    marginTop: '-8%',
-    marginBottom: '9.1%',
+    margin: '-8% 0% 8% 0%',
     width: '110%',
   },
   director: {
@@ -98,26 +87,21 @@ const styles = (theme) => ({
     marginTop: '-3%',
     display: 'inline-block',
   },
-  timeIcon: {
-    marginBottom: '-6%',
-    // marginRight: '1%',
+  durationIcon: {
     'font-size': '20px',
     paddingRight: '3%',
-    marginLeft: '-50%',
+    margin: '0% 5% -6% -50%',
     color: '#fff',
   },
   duration: {
     display: 'inline-block',
     padding: '3%',
-    marginLeft: '3%',
-    marginRight: '-2%',
-    marginTop: '3%',
+    margin: '3% -2% 0% 3%',
     font: '300 90% Roboto, sans-serif',
     color: '#fff',
   },
   genre: {
     display: 'inline-block',
-    // color: '#cee4fd',
     color: '#fff',
     border: '1px solid rgba(255,255,255,0.13)',
     padding: '1%',
@@ -125,11 +109,10 @@ const styles = (theme) => ({
     marginRight: '2%',
   },
 
-  movieActions: {
+  rightMovieInfoContainer: {
     position: 'absolute',
     bottom: 0,
     right: 20,
-    // width: '20%',
     display: 'flex',
     zIndex: 100,
   },
@@ -138,67 +121,27 @@ const styles = (theme) => ({
   //   display: 'inline-block',
   //   flex: 1,
   // },
-
   rating: {
     color: '#fff',
     font: '500 120% Roboto, sans-serif',
     'letter-spacing': '1px',
-    // display: 'inline-block',
     flex: 1,
     zIndex: 0,
   },
-  button: {
-    width: 200,
-    height: 70,
-    borderRadius: 0,
-    zIndex: 2,
-  },
-  grid: { height: '25%' },
+  // grid: { height: '25%' },
   gridList: {
     transform: 'translateZ(0)',
     flexWrap: 'nowrap',
-    // 'overflow-y': 'scroll !important',
-    transition: '.5s',
   },
-  iconPlay: {
-    'font-size': '40px',
-    color: 'white',
-    marginBottom: '10%',
-    // color: '#e50a15',
-    // backgroundColor: 'white',
-  },
-  iconClose: {
-    'font-size': '40px',
-    marginBottom: '10%',
-    // color: 'white',
-    color: '#e50a15',
-    // backgroundColor: 'white',
-    // paddingLeft: '10%',
-  },
-  sectionVideoContainer: {
-    // display: 'inline-block',
+  trailerContainer: {
     position: 'relative',
-    // padding: ' 30px 0 56.25% 0',
-    // paddingTop: '80%',
     marginTop: '-41.5%',
-    // marginLeft: '3%',
     marginLeft: '76%',
     zIndex: 300,
-    // marginBottom: '21%',
   },
-
-  sectionVideo: {
-    // 'text-align': 'center',
-    // margin: 'auto',
-    // width: '100%',
+  trailer: {
     width: '90vh',
     height: '50vh',
-    // height: '100%',
-    // 'border-radius': '5px',
-    // top: 0,
-    // left: 0,
-    // right: 0,
-    // position: 'absolute',
   },
   moviePoster: {
     width: '100%',

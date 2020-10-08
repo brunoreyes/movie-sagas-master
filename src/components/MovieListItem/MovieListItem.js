@@ -22,6 +22,7 @@ class MovieListItem extends Component {
           src={this.props.movieItem.poster}
           onClick={() => {
             this.props.handleMovieItemClicked(this.props.movieItem);
+            // this.clickhandler(); //enabling this functions allows us to view and edit each movie's info
           }}
           className={classes.moviePoster}
         ></img>
@@ -32,7 +33,6 @@ class MovieListItem extends Component {
 
 const mapStateToProps = (reduxState) => ({
   reduxState,
-  // movieItem: reduxState.movieItem,
 });
 
 export default withStyles(styles)(connect(mapStateToProps)(MovieListItem));

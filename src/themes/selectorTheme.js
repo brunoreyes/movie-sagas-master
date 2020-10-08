@@ -1,19 +1,15 @@
 const styles = (theme) => ({
   formControlContainer: { dispaly: 'flex' },
   formControlLeft: {
-    // float: 'left',
     marginRight: '16%',
-    // marginTop: '1.25%',
     font: '300 120% Roboto, sans-serif',
     color: 'white',
     flex: 1,
   },
   formControl: {
-    // margin: '-.2% -11.5% -1% 0%',
     margin: '-.2% -13.5% -1% 0%',
     width: '10%',
     font: '300 160% Roboto, sans-serif',
-    // float: 'left',
     flex: 1,
   },
   cssLabel: {
@@ -55,7 +51,6 @@ const styles = (theme) => ({
   categorySelector: {
     color: '#fff',
     marginTop: '4%',
-    // width: '50px',
     '&:focus': {
       'background-color': { opacity: 0 },
       border: '#fff solid 2px',

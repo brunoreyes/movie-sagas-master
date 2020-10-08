@@ -8,24 +8,6 @@ class Detail extends Component {
     id: this.props.match.params.id,
   };
 
-  componentDidMount() {
-    //   use component did mount to dispatch an action to request the SearchList from the API
-    // this.props.dispatch({
-    //   type: 'FETCH_DETAIL',
-    //   payload: this.props.match.params.id,
-    //   //
-    // });
-    // this.props.dispatch({ type: 'FETCH_MOVIES' });
-  }
-  componentDidMount() {
-    // //     //   use component did mount to dispatch an action to request the SearchList from the API
-    // //     this.props.dispatch({
-    // //       type: 'FETCH_DETAIL',
-    // //       payload: this.props.match.params.id,
-    // //       //
-    // //     });
-    // this.props.dispatch({ type: 'FETCH_EDITS' });
-  }
   editClicked = () => {
     this.props.history.push(`/Edit/${this.state.id}`);
     // changed this :this.props.history.push('/Detail/${id}') to whats on top to specify the actual id
